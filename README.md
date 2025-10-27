@@ -1,6 +1,6 @@
-# SVQRA
+# SAQRA
 
-**SVQRA** is a customized AI interface rebuilt from Open WebUI, fully rebranded and optimized for personal high-performance usage.
+**SAQRA** is a revolutionary AI collaboration platform where multiple AIs debate to find optimal solutions and truth, cooperate to generate and implement complete applications based on user instructions.
 
 ---
 
@@ -48,7 +48,7 @@ http://localhost:3000
 Replace all references to:
 
 ```
-Open WebUI → SVQRA
+Open WebUI → SAQRA
 ```
 
 This includes:
@@ -61,5 +61,5 @@ This includes:
 
 ## 🔐 Author
 
-**SVQRA Intelligence Lab**  
-Private-use AI orchestration environment.
+**SAQRA Intelligence Lab**
+Revolutionary AI collaboration and debate platform.
