@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleDisplayName</key>
+    <string>FreeAutotune</string>
+    <key>CFBundleExecutable</key>
+    <string>FreeAutotune</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.freeaudio.FreeAutotune</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>FreeAutotune</string>
+    <key>CFBundlePackageType</key>
+    <string>XPC!</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>NSExtension</key>
+    <dict>
+        <key>NSExtensionAttributes</key>
+        <dict>
+            <key>AudioComponents</key>
+            <array>
+                <dict>
+                    <key>description</key>
+                    <string>FreeAutotune</string>
+                    <key>manufacturer</key>
+                    <string>Free</string>
+                    <key>name</key>
+                    <string>FreeAutotune</string>
+                    <key>type</key>
+                    <string>aufx</string>
+                    <key>subtype</key>
+                    <string>Fatu</string>
+                    <key>version</key>
+                    <integer>1</integer>
+                    <key>sandboxSafe</key>
+                    <true/>
+                    <key>supportsNumberInputChannels</key>
+                    <integer>-1</integer>
+                    <key>supportsNumberOutputChannels</key>
+                    <integer>-1</integer>
+                    <key>tags</key>
+                    <array>
+                        <string>Effects</string>
+                        <string>Pitch</string>
+                    </array>
+                </dict>
+            </array>
+        </dict>
+        <key>NSExtensionPointIdentifier</key>
+        <string>com.apple.AudioUnit-UI</string>
+        <key>NSExtensionPrincipalClass</key>
+        <string>FreeAutotuneAU</string>
+    </dict>
+    <key>LSMinimumSystemVersion</key>
+    <string>11.0</string>
+</dict>
+</plist>
