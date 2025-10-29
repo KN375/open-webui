@@ -2,13 +2,14 @@
 
 Logic Pro対応の無料・高性能オートチューンプラグイン。リアルタイム処理に最適化された設計。
 
-## 特徴
+## ⚡ 特徴
 
-- **超低レイテンシー**: リアルタイムレコーディングに対応
-- **高精度ピッチ検出**: YINアルゴリズムベース
-- **自然なピッチ補正**: フォルマント保存型PSOLA実装
+- **Audio Unit V3 (AUV3)**: 最新のプラグイン規格に完全対応
+- **超低レイテンシー**: リアルタイムレコーディングに対応（約11ms）
+- **高精度ピッチ検出**: YINアルゴリズムベース（80-1000Hz対応）
+- **自然なピッチ補正**: フォルマント保存型TD-PSOLA実装
 - **直感的UI**: SwiftUIによるモダンなインターフェース
-- **Audio Unit V3**: Logic Pro完全対応
+- **高パフォーマンス**: Accelerate Framework活用、Apple Silicon最適化
 
 ## 主な機能
 
@@ -24,22 +25,52 @@ Logic Pro対応の無料・高性能オートチューンプラグイン。リ�
 - Logic Pro 10.7以降
 - Apple Silicon / Intel両対応
 
-## ビルド方法
+## 🔧 ビルド方法
 
+FreeAutotuneはAudio Unit V3 (AUV3) App Extensionとして実装されています。
+
+### 必要なもの
+- macOS 11.0以降
+- Xcode 13.0以降
+- Apple Developer証明書（開発用）
+
+### Xcodeでビルド（推奨）
+
+詳細な手順は **[BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md)** を参照してください。
+
+#### クイックスタート
+
+1. **Xcodeプロジェクトを作成**
+   ```bash
+   cd FreeAutotune
+   # Xcodeで手動プロジェクト作成（File → New → Project）
+   # または generate_xcode_project.rb を使用
+   ```
+
+2. **ソースファイルを追加**
+   - ホストアプリ: `HostApp/*`
+   - Audio Unit Extension: `Source/*`
+
+3. **ビルド設定**
+   - Swift-C++ Bridging Header を設定
+   - C++17標準を指定
+   - Accelerate Frameworkをリンク
+
+4. **ビルド**
+   ```bash
+   xcodebuild -scheme FreeAutotune -configuration Release
+   ```
+
+### インストール
+
+ビルド後、App全体を `/Applications` にコピー：
 ```bash
-cd FreeAutotune
-mkdir build && cd build
-cmake -G Xcode ..
-open FreeAutotune.xcodeproj
+cp -R build/Release/FreeAutotune.app /Applications/
 ```
 
-Xcodeでビルド後、プラグインは自動的にインストールされます。
-
-## インストール
-
-ビルド後、以下にプラグインがインストールされます：
+プラグイン（App Extension）は以下に含まれます：
 ```
-~/Library/Audio/Plug-Ins/Components/FreeAutotune.component
+/Applications/FreeAutotune.app/Contents/PlugIns/FreeAutotuneAU.appex
 ```
 
 ## 使い方

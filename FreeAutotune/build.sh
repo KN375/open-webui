@@ -1,19 +1,26 @@
 #!/bin/bash
 
-# FreeAutotune Build Script
-# Builds and installs the Audio Unit plugin for Logic Pro
+# FreeAutotune Build Script (AUV3 Version)
+# Builds and installs the Audio Unit V3 plugin for Logic Pro
 
 set -e
 
 echo "======================================"
-echo "FreeAutotune Build Script"
+echo "FreeAutotune Build Script (AUV3)"
 echo "======================================"
+echo ""
+echo "⚠️  IMPORTANT:"
+echo "This script requires a properly configured Xcode project."
+echo "Please follow BUILD_INSTRUCTIONS.md for detailed setup."
 echo ""
 
 # Configuration
+PROJECT_NAME="FreeAutotune"
 BUILD_DIR="build"
-INSTALL_DIR="$HOME/Library/Audio/Plug-Ins/Components"
-PLUGIN_NAME="FreeAutotune.component"
+APP_NAME="${PROJECT_NAME}.app"
+AU_EXTENSION="${PROJECT_NAME}AU.appex"
+INSTALL_DIR="/Applications"
+XCODE_PROJECT="${PROJECT_NAME}.xcodeproj"
 
 # Colors for output
 RED='\033[0;31m'
@@ -34,84 +41,95 @@ if ! command -v xcodebuild &> /dev/null; then
     exit 1
 fi
 
-# Check for CMake
-if ! command -v cmake &> /dev/null; then
-    echo -e "${YELLOW}Warning: CMake not found. Installing via Homebrew...${NC}"
-    if command -v brew &> /dev/null; then
-        brew install cmake
-    else
-        echo -e "${RED}Error: Homebrew not found. Please install CMake manually${NC}"
-        exit 1
-    fi
-fi
-
-# Clean previous build
-if [ -d "$BUILD_DIR" ]; then
-    echo "Cleaning previous build..."
-    rm -rf "$BUILD_DIR"
-fi
-
-# Create build directory
-echo "Creating build directory..."
-mkdir -p "$BUILD_DIR"
-cd "$BUILD_DIR"
-
-# Generate Xcode project
-echo ""
-echo "Generating Xcode project..."
-cmake -G Xcode ..
-
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Error: CMake configuration failed${NC}"
+# Check for Xcode project
+if [ ! -d "$XCODE_PROJECT" ]; then
+    echo -e "${RED}Error: Xcode project not found${NC}"
+    echo ""
+    echo "Please create the Xcode project first:"
+    echo "1. Follow instructions in BUILD_INSTRUCTIONS.md"
+    echo "2. Or use: ruby generate_xcode_project.rb"
+    echo ""
     exit 1
 fi
 
+# Clean previous build (optional)
+echo "Do you want to clean previous build? (y/N)"
+read -r response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    if [ -d "$BUILD_DIR" ]; then
+        echo "Cleaning previous build..."
+        rm -rf "$BUILD_DIR"
+    fi
+fi
+
+# Create build directory
+mkdir -p "$BUILD_DIR"
+
 # Build the project
 echo ""
-echo "Building FreeAutotune..."
+echo "Building FreeAutotune with Xcode..."
 echo "This may take a few minutes..."
-xcodebuild -project FreeAutotune.xcodeproj \
-           -scheme FreeAutotune \
+echo ""
+
+xcodebuild -project "$XCODE_PROJECT" \
+           -scheme "$PROJECT_NAME" \
            -configuration Release \
+           -derivedDataPath "$BUILD_DIR" \
            build
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error: Build failed${NC}"
+    echo ""
+    echo "Common issues:"
+    echo "1. Missing source files in Xcode project"
+    echo "2. Incorrect bridging header path"
+    echo "3. Code signing issues"
+    echo ""
+    echo "Please check BUILD_INSTRUCTIONS.md for detailed setup."
     exit 1
 fi
 
-# Create install directory if it doesn't exist
-echo ""
-echo "Installing plugin..."
-mkdir -p "$INSTALL_DIR"
+# Find built app
+BUILT_APP=$(find "$BUILD_DIR" -name "$APP_NAME" -type d | head -1)
 
-# Find built component
-BUILT_COMPONENT=$(find . -name "$PLUGIN_NAME" -type d | head -1)
+if [ -z "$BUILT_APP" ]; then
+    echo -e "${RED}Error: Built application not found${NC}"
+    echo "Expected location: $BUILD_DIR/Build/Products/Release/$APP_NAME"
+    exit 1
+fi
 
-if [ -z "$BUILT_COMPONENT" ]; then
-    echo -e "${RED}Error: Built component not found${NC}"
+echo "Found built app: $BUILT_APP"
+
+# Verify Audio Unit Extension exists
+AU_PATH="$BUILT_APP/Contents/PlugIns/$AU_EXTENSION"
+if [ ! -d "$AU_PATH" ]; then
+    echo -e "${RED}Error: Audio Unit Extension not found in app bundle${NC}"
+    echo "Expected: $AU_PATH"
     exit 1
 fi
 
 # Remove old installation if exists
-if [ -d "$INSTALL_DIR/$PLUGIN_NAME" ]; then
+if [ -d "$INSTALL_DIR/$APP_NAME" ]; then
     echo "Removing old installation..."
-    rm -rf "$INSTALL_DIR/$PLUGIN_NAME"
+    sudo rm -rf "$INSTALL_DIR/$APP_NAME"
 fi
 
-# Copy new plugin
-echo "Copying plugin to $INSTALL_DIR..."
-cp -R "$BUILT_COMPONENT" "$INSTALL_DIR/"
+# Copy new app
+echo "Copying app to $INSTALL_DIR..."
+sudo cp -R "$BUILT_APP" "$INSTALL_DIR/"
 
 # Verify installation
-if [ -d "$INSTALL_DIR/$PLUGIN_NAME" ]; then
+if [ -d "$INSTALL_DIR/$APP_NAME" ]; then
     echo ""
     echo -e "${GREEN}======================================"
     echo "Build and installation successful!"
     echo "======================================${NC}"
     echo ""
-    echo "Plugin installed to:"
-    echo "  $INSTALL_DIR/$PLUGIN_NAME"
+    echo "Application installed to:"
+    echo "  $INSTALL_DIR/$APP_NAME"
+    echo ""
+    echo "Audio Unit Extension located at:"
+    echo "  $INSTALL_DIR/$APP_NAME/Contents/PlugIns/$AU_EXTENSION"
     echo ""
     echo "Next steps:"
     echo "  1. Launch Logic Pro"
@@ -120,7 +138,7 @@ if [ -d "$INSTALL_DIR/$PLUGIN_NAME" ]; then
     echo "     Audio FX → Audio Units → FreeAutotune"
     echo ""
     echo "To uninstall:"
-    echo "  rm -rf \"$INSTALL_DIR/$PLUGIN_NAME\""
+    echo "  sudo rm -rf \"$INSTALL_DIR/$APP_NAME\""
     echo ""
 else
     echo -e "${RED}Error: Installation failed${NC}"
