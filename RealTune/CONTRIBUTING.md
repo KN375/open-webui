@@ -1,6 +1,6 @@
-# Contributing to FreeAutotune
+# Contributing to Real Tune
 
-FreeAutotuneへの貢献に興味を持っていただき、ありがとうございます！このドキュメントは、プロジェクトに貢献する方法を説明します。
+Real Tuneへの貢献に興味を持っていただき、ありがとうございます！このドキュメントは、プロジェクトに貢献する方法を説明します。
 
 ## 目次
 
@@ -30,7 +30,7 @@ FreeAutotuneへの貢献に興味を持っていただき、ありがとうご�
 3. 以下の情報を含める：
    - macOSバージョン
    - Logic Proバージョン
-   - FreeAutotuneバージョン
+   - Real Tuneバージョン
    - 再現手順
    - 期待される動作
    - 実際の動作
@@ -49,8 +49,8 @@ FreeAutotuneへの貢献に興味を持っていただき、ありがとうご�
 
 1. **フォークとクローン**
    ```bash
-   git clone https://github.com/your-username/FreeAutotune.git
-   cd FreeAutotune
+   git clone https://github.com/your-username/Real Tune.git
+   cd Real Tune
    ```
 
 2. **ブランチ作成**
@@ -96,10 +96,10 @@ brew install clang-format
 ### ビルド手順
 
 ```bash
-cd FreeAutotune
+cd Real Tune
 mkdir build && cd build
 cmake -G Xcode ..
-open FreeAutotune.xcodeproj
+open Real Tune.xcodeproj
 ```
 
 ### テストの実行
@@ -157,7 +157,7 @@ float calculateFrequency(float period);
 // クラス/構造体: PascalCase
 class AudioUnitViewController {
     // プロパティ: camelCase
-    var audioUnit: FreeAutotuneAU?
+    var audioUnit: Real TuneAU?
 
     // メソッド: camelCase
     func createAudioUnit() {
@@ -303,7 +303,7 @@ Closes #42
 ## 環境
 - macOSバージョン: [例: 14.2]
 - Logic Proバージョン: [例: 10.8]
-- FreeAutotuneバージョン: [例: 1.0.0]
+- Real Tuneバージョン: [例: 1.0.0]
 - チップ: [例: Apple M1]
 
 ## 追加情報
@@ -400,7 +400,7 @@ float detectPitch(const float* buffer, int size) {
 
 ## 謝辞
 
-FreeAutotuneは以下の方々の貢献により成り立っています：
+Real Tuneは以下の方々の貢献により成り立っています：
 - すべてのコントリビューター
 - イシューを報告してくれた方々
 - ドキュメントを改善してくれた方々

@@ -1,6 +1,6 @@
 //
-//  FreeAutotune-Bridging-Header.h
-//  FreeAutotune
+//  RealTune-Bridging-Header.h
+//  RealTune
 //
 //  Bridging header to expose Objective-C/C++ to Swift
 //

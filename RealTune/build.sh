@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# FreeAutotune Build Script (AUV3 Version)
+# RealTune Build Script (AUV3 Version)
 # Builds and installs the Audio Unit V3 plugin for Logic Pro
 
 set -e
 
 echo "======================================"
-echo "FreeAutotune Build Script (AUV3)"
+echo "RealTune Build Script (AUV3)"
 echo "======================================"
 echo ""
 echo "⚠️  IMPORTANT:"
@@ -15,7 +15,7 @@ echo "Please follow BUILD_INSTRUCTIONS.md for detailed setup."
 echo ""
 
 # Configuration
-PROJECT_NAME="FreeAutotune"
+PROJECT_NAME="RealTune"
 BUILD_DIR="build"
 APP_NAME="${PROJECT_NAME}.app"
 AU_EXTENSION="${PROJECT_NAME}AU.appex"
@@ -67,7 +67,7 @@ mkdir -p "$BUILD_DIR"
 
 # Build the project
 echo ""
-echo "Building FreeAutotune with Xcode..."
+echo "Building RealTune with Xcode..."
 echo "This may take a few minutes..."
 echo ""
 
@@ -134,8 +134,8 @@ if [ -d "$INSTALL_DIR/$APP_NAME" ]; then
     echo "Next steps:"
     echo "  1. Launch Logic Pro"
     echo "  2. Create or open a project"
-    echo "  3. Add FreeAutotune to an audio track:"
-    echo "     Audio FX → Audio Units → FreeAutotune"
+    echo "  3. Add RealTune to an audio track:"
+    echo "     Audio FX → Audio Units → RealTune"
     echo ""
     echo "To uninstall:"
     echo "  sudo rm -rf \"$INSTALL_DIR/$APP_NAME\""

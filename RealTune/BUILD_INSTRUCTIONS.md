@@ -1,6 +1,6 @@
-# FreeAutotune ビルド手順（完全版）
+# Real Tune ビルド手順（完全版）
 
-このドキュメントでは、FreeAutotuneをゼロからビルドしてLogic Proで使用可能にするまでの完全な手順を説明します。
+このドキュメントでは、Real TuneをゼロからビルドしてLogic Proで使用可能にするまでの完全な手順を説明します。
 
 ## 📋 目次
 
@@ -34,13 +34,13 @@ xcode-select --install
 
 ## プロジェクト構造の理解
 
-FreeAutotuneはAudio Unit V3 (AUV3) App Extensionとして実装されています。
+Real TuneはAudio Unit V3 (AUV3) App Extensionとして実装されています。
 
 ```
-FreeAutotune.app                    ← ホストアプリ（空っぽでOK）
+Real Tune.app                    ← ホストアプリ（空っぽでOK）
 └── Contents/
     └── PlugIns/
-        └── FreeAutotuneAU.appex   ← 実際のプラグイン（Audio Unit Extension）
+        └── Real TuneAU.appex   ← 実際のプラグイン（Audio Unit Extension）
 ```
 
 **なぜこの構造？**
@@ -65,10 +65,10 @@ FreeAutotune.app                    ← ホストアプリ（空っぽでOK）
 
 4. **プロジェクト設定:**
    ```
-   Product Name: FreeAutotune
+   Product Name: Real Tune
    Team: (あなたのApple Developer Team)
    Organization Identifier: com.freeaudio
-   Bundle Identifier: com.freeaudio.FreeAutotune (自動生成)
+   Bundle Identifier: com.freeaudio.Real Tune (自動生成)
    Interface: SwiftUI
    Language: Swift
    ☐ Use Core Data (チェックなし)
@@ -77,13 +77,13 @@ FreeAutotune.app                    ← ホストアプリ（空っぽでOK）
    - **Next** をクリック
 
 5. **保存場所:**
-   - FreeAutotuneフォルダと同じ階層を選択
+   - Real Tuneフォルダと同じ階層を選択
    - **Create** をクリック
 
 ### ステップ2: Audio Unit Extension Targetの追加
 
 1. **プロジェクトナビゲーター（左側）でプロジェクトファイルをクリック**
-   - 青い "FreeAutotune" アイコンをクリック
+   - 青い "Real Tune" アイコンをクリック
 
 2. **下部の + ボタンをクリック** (TARGETS の下)
 
@@ -94,10 +94,10 @@ FreeAutotune.app                    ← ホストアプリ（空っぽでOK）
 
 4. **Extension設定:**
    ```
-   Product Name: FreeAutotuneAU
+   Product Name: Real TuneAU
    Team: (あなたのApple Developer Team)
-   Organization Identifier: com.freeaudio.FreeAutotune
-   Bundle Identifier: com.freeaudio.FreeAutotune.AudioUnit (自動生成)
+   Organization Identifier: com.freeaudio.Real Tune
+   Bundle Identifier: com.freeaudio.Real Tune.AudioUnit (自動生成)
    Language: Swift
 
    Audio Unit Properties:
@@ -108,21 +108,21 @@ FreeAutotune.app                    ← ホストアプリ（空っぽでOK）
    - **Finish** をクリック
 
 5. **アクティベーション確認ダイアログ:**
-   - "Activate "FreeAutotuneAU" scheme?" と聞かれたら
+   - "Activate "Real TuneAU" scheme?" と聞かれたら
    - **Activate** をクリック
 
 ### ステップ3: 自動生成ファイルの削除
 
 Xcodeが自動生成したテンプレートファイルを削除します（私たちの実装と置き換えるため）。
 
-**ホストアプリ (FreeAutotune target):**
-1. `FreeAutotuneApp.swift` - 削除
+**ホストアプリ (Real Tune target):**
+1. `Real TuneApp.swift` - 削除
 2. `ContentView.swift` - 削除
 3. `Assets.xcassets` - 保持
 
-**Audio Unit Extension (FreeAutotuneAU target):**
+**Audio Unit Extension (Real TuneAU target):**
 1. `AudioUnitViewController.swift` - 削除
-2. `FreeAutotuneAUAudioUnit.swift` - 削除
+2. `Real TuneAUAudioUnit.swift` - 削除
 3. `Parameters.swift` - 削除
 4. `DSPKernel.hpp` - 削除
 5. `DSPKernel.mm` - 削除
@@ -132,75 +132,75 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 #### 4.1 ホストアプリのファイル追加
 
-1. **FreeAutotune groupを右クリック → Add Files to "FreeAutotune"...**
+1. **Real Tune groupを右クリック → Add Files to "Real Tune"...**
 
 2. **以下のファイルを選択:**
    ```
-   FreeAutotune/HostApp/FreeAutotuneApp.swift
+   Real Tune/HostApp/Real TuneApp.swift
    ```
 
 3. **Options:**
    - ✅ Copy items if needed (チェック)
    - ✅ Create groups (選択)
-   - Add to targets: ✅ FreeAutotune のみチェック
+   - Add to targets: ✅ Real Tune のみチェック
    - **Add** をクリック
 
 #### 4.2 Audio Unit ExtensionのSwiftファイル追加
 
-1. **FreeAutotuneAU groupを右クリック → Add Files to "FreeAutotune"...**
+1. **Real TuneAU groupを右クリック → Add Files to "Real Tune"...**
 
 2. **以下のファイルを選択:**
    ```
-   FreeAutotune/Source/FreeAutotuneAU.swift
-   FreeAutotune/Source/AudioUnitViewController.swift
-   FreeAutotune/Source/ParameterAddress.swift
+   Real Tune/Source/Real TuneAU.swift
+   Real Tune/Source/AudioUnitViewController.swift
+   Real Tune/Source/ParameterAddress.swift
    ```
 
 3. **Options:**
    - ✅ Copy items if needed
    - ✅ Create groups
-   - Add to targets: ✅ FreeAutotuneAU のみチェック
+   - Add to targets: ✅ Real TuneAU のみチェック
    - **Add** をクリック
 
 #### 4.3 DSPファイル（C++）の追加
 
-1. **FreeAutotuneAU groupを右クリック → New Group**
+1. **Real TuneAU groupを右クリック → New Group**
    - 名前: `DSP`
 
-2. **DSP groupを右クリック → Add Files to "FreeAutotune"...**
+2. **DSP groupを右クリック → Add Files to "Real Tune"...**
 
 3. **以下のファイルを選択:**
    ```
-   FreeAutotune/Source/DSP/PitchDetector.hpp
-   FreeAutotune/Source/DSP/PitchDetector.cpp
-   FreeAutotune/Source/DSP/PitchShifter.hpp
-   FreeAutotune/Source/DSP/PitchShifter.cpp
-   FreeAutotune/Source/DSP/AudioProcessor.hpp
-   FreeAutotune/Source/DSP/AudioProcessor.cpp
-   FreeAutotune/Source/DSP/DSPKernel.hpp
-   FreeAutotune/Source/DSP/DSPKernel.cpp
-   FreeAutotune/Source/DSP/DSPKernelAdapter.h
-   FreeAutotune/Source/DSP/DSPKernelAdapter.mm
+   Real Tune/Source/DSP/PitchDetector.hpp
+   Real Tune/Source/DSP/PitchDetector.cpp
+   Real Tune/Source/DSP/PitchShifter.hpp
+   Real Tune/Source/DSP/PitchShifter.cpp
+   Real Tune/Source/DSP/AudioProcessor.hpp
+   Real Tune/Source/DSP/AudioProcessor.cpp
+   Real Tune/Source/DSP/DSPKernel.hpp
+   Real Tune/Source/DSP/DSPKernel.cpp
+   Real Tune/Source/DSP/DSPKernelAdapter.h
+   Real Tune/Source/DSP/DSPKernelAdapter.mm
    ```
 
 4. **Options:**
    - ✅ Copy items if needed
    - ✅ Create groups
-   - Add to targets: ✅ FreeAutotuneAU のみチェック
+   - Add to targets: ✅ Real TuneAU のみチェック
    - **Add** をクリック
 
 #### 4.4 Bridging Headerの追加
 
-1. **FreeAutotuneAU groupを右クリック → Add Files to "FreeAutotune"...**
+1. **Real TuneAU groupを右クリック → Add Files to "Real Tune"...**
 
 2. **ファイルを選択:**
    ```
-   FreeAutotune/Source/FreeAutotune-Bridging-Header.h
+   Real Tune/Source/Real Tune-Bridging-Header.h
    ```
 
 3. **Options:**
    - ✅ Copy items if needed
-   - Add to targets: ✅ FreeAutotuneAU のみチェック
+   - Add to targets: ✅ Real TuneAU のみチェック
    - **Add** をクリック
 
 ### ステップ5: Info.plistファイルの置き換え
@@ -209,51 +209,51 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 1. プロジェクトナビゲーターで自動生成された `Info.plist` を削除
 
-2. **FreeAutotune group → Add Files to "FreeAutotune"...**
+2. **Real Tune group → Add Files to "Real Tune"...**
    ```
-   FreeAutotune/HostApp/Info.plist
+   Real Tune/HostApp/Info.plist
    ```
 
-3. **Add to targets: ✅ FreeAutotune**
+3. **Add to targets: ✅ Real Tune**
 
 #### 5.2 Audio Unit ExtensionのInfo.plist
 
 1. プロジェクトナビゲーターで自動生成された `Info.plist` を削除
 
-2. **FreeAutotuneAU group → Add Files to "FreeAutotune"...**
+2. **Real TuneAU group → Add Files to "Real Tune"...**
    ```
-   FreeAutotune/AudioUnitExtension-Info.plist
+   Real Tune/AudioUnitExtension-Info.plist
    ```
 
-3. **Add to targets: ✅ FreeAutotuneAU**
+3. **Add to targets: ✅ Real TuneAU**
 
 ### ステップ6: Entitlementsの追加
 
 #### 6.1 ホストアプリのEntitlements
 
-1. **FreeAutotune group → Add Files to "FreeAutotune"...**
+1. **Real Tune group → Add Files to "Real Tune"...**
    ```
-   FreeAutotune/FreeAutotune.entitlements
+   Real Tune/Real Tune.entitlements
    ```
 
-2. **Add to targets: ✅ FreeAutotune**
+2. **Add to targets: ✅ Real Tune**
 
 #### 6.2 Audio Unit ExtensionのEntitlements
 
-1. **FreeAutotuneAU group → Add Files to "FreeAutotune"...**
+1. **Real TuneAU group → Add Files to "Real Tune"...**
    ```
-   FreeAutotune/FreeAutotuneAU.entitlements
+   Real Tune/Real TuneAU.entitlements
    ```
 
-2. **Add to targets: ✅ FreeAutotuneAU**
+2. **Add to targets: ✅ Real TuneAU**
 
 ### ステップ7: ビルド設定
 
-#### 7.1 FreeAutotuneAU Target（Audio Unit Extension）
+#### 7.1 Real TuneAU Target（Audio Unit Extension）
 
 1. **プロジェクトナビゲーター → プロジェクトファイルをクリック**
 
-2. **TARGETS → FreeAutotuneAU を選択**
+2. **TARGETS → Real TuneAU を選択**
 
 3. **Build Settings タブ**
 
@@ -261,11 +261,11 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 5. **Swift Compiler - General → Objective-C Bridging Header**
    ```
-   $(SRCROOT)/FreeAutotune/Source/FreeAutotune-Bridging-Header.h
+   $(SRCROOT)/Real Tune/Source/Real Tune-Bridging-Header.h
    ```
    または相対パス:
    ```
-   Source/FreeAutotune-Bridging-Header.h
+   Source/Real Tune-Bridging-Header.h
    ```
 
 6. **検索ボックスに "c++ language" と入力**
@@ -293,12 +293,12 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 13. **Signing → Code Signing Entitlements**
     ```
-    FreeAutotuneAU.entitlements
+    Real TuneAU.entitlements
     ```
 
-#### 7.2 FreeAutotune Target（ホストアプリ）
+#### 7.2 Real Tune Target（ホストアプリ）
 
-1. **TARGETS → FreeAutotune を選択**
+1. **TARGETS → Real Tune を選択**
 
 2. **Build Settings タブ**
 
@@ -309,12 +309,12 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 4. **Signing → Code Signing Entitlements**
    ```
-   FreeAutotune.entitlements
+   Real Tune.entitlements
    ```
 
-#### 7.3 Frameworksのリンク（FreeAutotuneAU Target）
+#### 7.3 Frameworksのリンク（Real TuneAU Target）
 
-1. **TARGETS → FreeAutotuneAU を選択**
+1. **TARGETS → Real TuneAU を選択**
 
 2. **Build Phases タブ**
 
@@ -328,7 +328,7 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
    - `AVFoundation.framework`
    - `CoreAudio.framework`
 
-#### 7.4 Compile Sources の確認（FreeAutotuneAU Target）
+#### 7.4 Compile Sources の確認（Real TuneAU Target）
 
 1. **Build Phases タブ**
 
@@ -336,7 +336,7 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 3. **以下のファイルがすべて含まれていることを確認:**
    ```
-   FreeAutotuneAU.swift
+   Real TuneAU.swift
    AudioUnitViewController.swift
    ParameterAddress.swift
    PitchDetector.cpp
@@ -352,9 +352,9 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 ### ステップ8: Signing & Capabilities
 
-#### 8.1 FreeAutotuneAU Target
+#### 8.1 Real TuneAU Target
 
-1. **TARGETS → FreeAutotuneAU を選択**
+1. **TARGETS → Real TuneAU を選択**
 
 2. **Signing & Capabilities タブ**
 
@@ -368,9 +368,9 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
    - ✅ App Sandbox
    - ✅ Audio Input (必要に応じて)
 
-#### 8.2 FreeAutotune Target
+#### 8.2 Real Tune Target
 
-1. **TARGETS → FreeAutotune を選択**
+1. **TARGETS → Real Tune を選択**
 
 2. **Signing & Capabilities タブ**
 
@@ -380,7 +380,7 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 ### ステップ9: Embed App Extension
 
-1. **TARGETS → FreeAutotune を選択**
+1. **TARGETS → Real Tune を選択**
 
 2. **General タブ**
 
@@ -388,7 +388,7 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 4. **+ ボタンをクリック**
 
-5. **FreeAutotuneAU.appex を選択**
+5. **Real TuneAU.appex を選択**
 
 6. **Embed:** "Embed & Sign" を選択
 
@@ -399,7 +399,7 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 ### ステップ1: Schemeの選択
 
 1. **Xcodeのツールバー（上部）でSchemeを選択**
-   - **FreeAutotune** を選択（FreeAutotuneAUではない）
+   - **Real Tune** を選択（Real TuneAUではない）
 
 2. **デバイス:** "My Mac" を選択
 
@@ -418,10 +418,10 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 2. **以下の構造を確認:**
    ```
    Build/Products/Debug/
-   └── FreeAutotune.app
+   └── Real Tune.app
        └── Contents/
            └── PlugIns/
-               └── FreeAutotuneAU.appex
+               └── Real TuneAU.appex
    ```
 
 ### ステップ4: インストール
@@ -430,16 +430,16 @@ Xcodeが自動生成したテンプレートファイルを削除します（私
 
 ```bash
 # ビルドされた.appを /Applications にコピー
-cp -R ~/Library/Developer/Xcode/DerivedData/FreeAutotune-*/Build/Products/Debug/FreeAutotune.app /Applications/
+cp -R ~/Library/Developer/Xcode/DerivedData/Real Tune-*/Build/Products/Debug/Real Tune.app /Applications/
 
 # または Release ビルドの場合
-cp -R ~/Library/Developer/Xcode/DerivedData/FreeAutotune-*/Build/Products/Release/FreeAutotune.app /Applications/
+cp -R ~/Library/Developer/Xcode/DerivedData/Real Tune-*/Build/Products/Release/Real Tune.app /Applications/
 ```
 
 #### 方法2: ビルドスクリプト使用
 
 ```bash
-cd FreeAutotune
+cd Real Tune
 ./build.sh
 ```
 
@@ -461,7 +461,7 @@ rm -rf ~/Library/Caches/AudioUnitCache
 
 3. **オーディオトラックを選択**
 
-4. **Audio FX → Audio Units → FreeAutotune**
+4. **Audio FX → Audio Units → Real Tune**
 
 5. **プラグインが表示されることを確認**
 
@@ -477,7 +477,7 @@ rm -rf ~/Library/Caches/AudioUnitCache
 1. Build Settings → Swift Compiler → Objective-C Bridging Header
 2. パスを確認:
    ```
-   $(SRCROOT)/FreeAutotune/Source/FreeAutotune-Bridging-Header.h
+   $(SRCROOT)/Real Tune/Source/Real Tune-Bridging-Header.h
    ```
 3. または、ファイルを右クリック → Show in Finder でパスを確認
 
@@ -504,13 +504,13 @@ rm -rf ~/Library/Caches/AudioUnitCache
 
 **解決策:**
 1. ホストアプリのGeneral → Frameworks, Libraries, and Embedded Content
-2. FreeAutotuneAU.appex が "Embed & Sign" になっているか確認
+2. Real TuneAU.appex が "Embed & Sign" になっているか確認
 
 **原因2:** Bundle Identifierが間違っている
 
 **解決策:**
-1. FreeAutotuneAU target → General → Bundle Identifier
-2. `com.freeaudio.FreeAutotune.AudioUnit` であることを確認
+1. Real TuneAU target → General → Bundle Identifier
+2. `com.freeaudio.Real Tune.AudioUnit` であることを確認
 
 **原因3:** Audio Component キャッシュが古い
 
@@ -528,7 +528,7 @@ rm -rf ~/Library/Caches/AudioUnitCache
 # すべてのAudio Unitを表示
 auval -a
 
-# FreeAutotuneを検証
+# Real Tuneを検証
 auval -v aufx Fatu Free
 
 # 詳細出力
@@ -541,7 +541,7 @@ auval -v aufx Fatu Free -de
 VALIDATING AUDIO UNIT: 'aufx' - 'Fatu' - 'Free'
 --------------------------------------------------
 Manufacturer String: Free
-AudioUnit Name: FreeAutotune
+AudioUnit Name: Real Tune
 Component Version: 1.0.0 (0x00010000)
 
 * * PASS
@@ -563,7 +563,7 @@ Component Version: 1.0.0 (0x00010000)
 **原因:** DSPコードが正しく接続されていない
 
 **解決策:**
-1. FreeAutotuneAU.swift の `internalRenderBlock` を確認
+1. Real TuneAU.swift の `internalRenderBlock` を確認
 2. DSPKernelAdapter が正しく呼び出されているか確認
 3. デバッガーでブレークポイントを設定して確認
 
@@ -589,13 +589,13 @@ Component Version: 1.0.0 (0x00010000)
 # コード署名
 codesign --deep --force --verify --verbose \
   --sign "Developer ID Application: Your Name (TEAM_ID)" \
-  /Applications/FreeAutotune.app
+  /Applications/Real Tune.app
 
 # 検証
-codesign --verify --deep --strict --verbose=2 /Applications/FreeAutotune.app
+codesign --verify --deep --strict --verbose=2 /Applications/Real Tune.app
 
 # 公証（macOS 11.0以降）
-xcrun notarytool submit FreeAutotune.zip \
+xcrun notarytool submit Real Tune.zip \
   --apple-id "your@email.com" \
   --password "app-specific-password" \
   --team-id "TEAM_ID"

@@ -5,15 +5,15 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>FreeAutotune</string>
+    <string>RealTune</string>
     <key>CFBundleExecutable</key>
-    <string>FreeAutotune</string>
+    <string>RealTune</string>
     <key>CFBundleIdentifier</key>
-    <string>com.freeaudio.FreeAutotune</string>
+    <string>com.realtune.RealTune</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>FreeAutotune</string>
+    <string>RealTune</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
@@ -23,7 +23,7 @@
     <key>LSMinimumSystemVersion</key>
     <string>11.0</string>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright © 2025 FreeAutotune Contributors. All rights reserved.</string>
+    <string>Copyright © 2025 RealTune Contributors. All rights reserved.</string>
     <key>NSMainStoryboardFile</key>
     <string>Main</string>
     <key>NSPrincipalClass</key>

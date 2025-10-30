@@ -1,4 +1,4 @@
-# FreeAutotune - Logic Pro用高性能オートチューンプラグイン
+# Real Tune - Logic Pro用高性能オートチューンプラグイン
 
 Logic Pro対応の無料・高性能オートチューンプラグイン。リアルタイム処理に最適化された設計。
 
@@ -27,7 +27,7 @@ Logic Pro対応の無料・高性能オートチューンプラグイン。リ�
 
 ## 🔧 ビルド方法
 
-FreeAutotuneはAudio Unit V3 (AUV3) App Extensionとして実装されています。
+Real TuneはAudio Unit V3 (AUV3) App Extensionとして実装されています。
 
 ### 必要なもの
 - macOS 11.0以降
@@ -42,7 +42,7 @@ FreeAutotuneはAudio Unit V3 (AUV3) App Extensionとして実装されていま�
 
 1. **Xcodeプロジェクトを作成**
    ```bash
-   cd FreeAutotune
+   cd Real Tune
    # Xcodeで手動プロジェクト作成（File → New → Project）
    # または generate_xcode_project.rb を使用
    ```
@@ -58,25 +58,25 @@ FreeAutotuneはAudio Unit V3 (AUV3) App Extensionとして実装されていま�
 
 4. **ビルド**
    ```bash
-   xcodebuild -scheme FreeAutotune -configuration Release
+   xcodebuild -scheme Real Tune -configuration Release
    ```
 
 ### インストール
 
 ビルド後、App全体を `/Applications` にコピー：
 ```bash
-cp -R build/Release/FreeAutotune.app /Applications/
+cp -R build/Release/Real Tune.app /Applications/
 ```
 
 プラグイン（App Extension）は以下に含まれます：
 ```
-/Applications/FreeAutotune.app/Contents/PlugIns/FreeAutotuneAU.appex
+/Applications/Real Tune.app/Contents/PlugIns/Real TuneAU.appex
 ```
 
 ## 使い方
 
 1. Logic Proでトラックを選択
-2. Audio FX → Audio Units → FreeAutotune を追加
+2. Audio FX → Audio Units → Real Tune を追加
 3. キーとスケールを設定
 4. Retune Speedで補正強度を調整
 

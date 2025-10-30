@@ -1,6 +1,6 @@
-# FreeAutotune - 技術仕様書
+# Real Tune - 技術仕様書
 
-FreeAutotuneの内部実装と技術的な詳細について解説します。
+Real Tuneの内部実装と技術的な詳細について解説します。
 
 ## アーキテクチャ概要
 
@@ -10,7 +10,7 @@ FreeAutotuneの内部実装と技術的な詳細について解説します。
 └──────────────┬──────────────────────┘
                │ Audio Unit V3 API
 ┌──────────────▼──────────────────────┐
-│   FreeAutotuneAU (Swift)            │
+│   Real TuneAU (Swift)            │
 │   - Parameter Management            │
 │   - Audio Buffer Routing            │
 │   - GUI Integration                 │
@@ -396,5 +396,5 @@ MIT License - 詳細は LICENSE ファイルを参照
 
 ---
 
-**作成者**: FreeAutotune Contributors
+**作成者**: Real Tune Contributors
 **最終更新**: 2025

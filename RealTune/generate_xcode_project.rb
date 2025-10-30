@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# FreeAutotune Xcode Project Generator
+# RealTune Xcode Project Generator
 # Generates a basic Xcode project structure for AUV3 plugin
 #
 # Usage: ruby generate_xcode_project.rb
@@ -11,14 +11,14 @@ require 'securerandom'
 
 class XcodeProjectGenerator
   def initialize
-    @project_name = "FreeAutotune"
-    @bundle_id = "com.freeaudio.FreeAutotune"
+    @project_name = "RealTune"
+    @bundle_id = "com.freeaudio.RealTune"
     @au_bundle_id = "#{@bundle_id}.AudioUnit"
     @project_dir = "#{@project_name}.xcodeproj"
   end
 
   def generate
-    puts "🎵 FreeAutotune Xcode Project Generator"
+    puts "🎵 RealTune Xcode Project Generator"
     puts "======================================\n\n"
 
     create_project_structure

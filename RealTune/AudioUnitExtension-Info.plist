@@ -5,15 +5,15 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>FreeAutotune</string>
+    <string>RealTune</string>
     <key>CFBundleExecutable</key>
-    <string>FreeAutotuneAU</string>
+    <string>RealTuneAU</string>
     <key>CFBundleIdentifier</key>
-    <string>com.freeaudio.FreeAutotune.AudioUnit</string>
+    <string>com.realtune.RealTune.AudioUnit</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>FreeAutotune</string>
+    <string>RealTune</string>
     <key>CFBundlePackageType</key>
     <string>XPC!</string>
     <key>CFBundleShortVersionString</key>
@@ -28,11 +28,11 @@
             <array>
                 <dict>
                     <key>description</key>
-                    <string>FreeAutotune</string>
+                    <string>RealTune</string>
                     <key>manufacturer</key>
                     <string>Free</string>
                     <key>name</key>
-                    <string>FreeAutotune</string>
+                    <string>RealTune</string>
                     <key>type</key>
                     <string>aufx</string>
                     <key>subtype</key>

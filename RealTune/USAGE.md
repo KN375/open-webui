@@ -1,4 +1,4 @@
-# FreeAutotune 使い方ガイド
+# Real Tune 使い方ガイド
 
 Logic Pro用の高性能オートチューンプラグインの詳細な使い方を解説します。
 
@@ -22,7 +22,7 @@ Logic Pro用の高性能オートチューンプラグインの詳細な使い�
 ### ビルド手順
 
 ```bash
-cd FreeAutotune
+cd Real Tune
 ./build.sh
 ```
 
@@ -37,7 +37,7 @@ cd FreeAutotune
 ビルドされたプラグインは以下の場所にインストールされます：
 
 ```
-~/Library/Audio/Plug-Ins/Components/FreeAutotune.component
+~/Library/Audio/Plug-Ins/Components/Real Tune.component
 ```
 
 ## 基本的な使い方
@@ -46,7 +46,7 @@ cd FreeAutotune
 
 1. オーディオトラックを選択
 2. インサートスロットをクリック
-3. **Audio Units → FreeAutotune** を選択
+3. **Audio Units → Real Tune** を選択
 4. プラグインウィンドウが開きます
 
 ### 2. 基本設定
@@ -178,7 +178,7 @@ Formant Preserve: 70%
 
 ### 1. レイテンシーについて
 
-FreeAutotuneは低レイテンシー設計（約11ms @ 44.1kHz）：
+Real Tuneは低レイテンシー設計（約11ms @ 44.1kHz）：
 - リアルタイム録音に対応
 - モニタリング時の遅延が最小限
 - ライブパフォーマンスにも使用可能
@@ -196,7 +196,7 @@ FreeAutotuneは低レイテンシー設計（約11ms @ 44.1kHz）：
 ```
 1. EQ (ハイパスフィルター)
 2. Compressor (軽く)
-3. FreeAutotune ← ここ
+3. Real Tune ← ここ
 4. De-esser
 5. Reverb/Delay
 ```
@@ -204,7 +204,7 @@ FreeAutotuneは低レイテンシー設計（約11ms @ 44.1kHz）：
 **理由**：
 - EQ前処理で不要な低音を除去
 - コンプレッサーで音量を均一化
-- FreeAutotuneでピッチを補正
+- Real Tuneでピッチを補正
 - 後処理でサウンドを完成
 
 ### 4. マイクテクニック
@@ -227,7 +227,7 @@ FreeAutotuneは低レイテンシー設計（約11ms @ 44.1kHz）：
 2. Logic Proを再起動
 3. プラグインマネージャーで確認：
    - Logic Pro → 環境設定 → プラグインマネージャー
-   - FreeAutotuneが有効か確認
+   - Real Tuneが有効か確認
 
 ### 問題: 音が歪む・クリッピングする
 
@@ -279,7 +279,7 @@ FreeAutotuneは低レイテンシー設計（約11ms @ 44.1kHz）：
 
 Logic Proでパラメータをオートメーション可能：
 1. トラックでオートメーションを有効化
-2. FreeAutotuneのパラメータを選択
+2. Real Tuneのパラメータを選択
 3. タイムライン上で自動化
 
 **活用例**：
@@ -352,6 +352,6 @@ A: 基本的なピッチ補正機能は同等です。高度な機能（グラ�
 
 ---
 
-**作成者**: FreeAutotune Contributors
+**作成者**: Real Tune Contributors
 **ライセンス**: MIT License
 **最終更新**: 2025

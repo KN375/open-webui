@@ -9,7 +9,7 @@ enum ParameterAddress: AUParameterAddress {
 }
 
 extension AUParameterTree {
-    static func createFreeAutotuneParameters() -> AUParameterTree {
+    static func createRealTuneParameters() -> AUParameterTree {
         // Retune Speed (0-100%)
         let retuneSpeedParam = AUParameterTree.createParameter(
             withIdentifier: "retuneSpeed",

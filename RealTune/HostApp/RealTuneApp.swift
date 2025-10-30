@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct FreeAutotuneApp: App {
+struct RealTuneApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -16,10 +16,10 @@ struct ContentView: View {
                 .font(.system(size: 80))
                 .foregroundColor(.blue)
 
-            Text("FreeAutotune")
+            Text("Real Tune")
                 .font(.system(size: 36, weight: .bold))
 
-            Text("High-Performance Autotune Plugin")
+            Text("High-Performance Pitch Correction Plugin")
                 .font(.system(size: 16))
                 .foregroundColor(.secondary)
 
@@ -55,7 +55,7 @@ struct ContentView: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("1. Open Logic Pro")
-                Text("2. Add Audio FX → Audio Units → FreeAutotune")
+                Text("2. Add Audio FX → Audio Units → Real Tune")
                 Text("3. Adjust parameters for your desired effect")
             }
             .font(.system(size: 14))

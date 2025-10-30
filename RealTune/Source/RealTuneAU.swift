@@ -2,9 +2,9 @@ import AudioToolbox
 import AVFoundation
 import CoreAudio
 
-/// Main Audio Unit implementation for FreeAutotune
+/// Main Audio Unit implementation for RealTune
 /// Provides real-time pitch correction with low latency
-public class FreeAutotuneAU: AUAudioUnit {
+public class RealTuneAU: AUAudioUnit {
 
     // DSP Kernel (C++ bridge)
     private var kernel: DSPKernel!
@@ -51,7 +51,7 @@ public class FreeAutotuneAU: AUAudioUnit {
         kernel = DSPKernel(format: format)
 
         // Create parameter tree
-        parameterTree = AUParameterTree.createFreeAutotuneParameters()
+        parameterTree = AUParameterTree.createRealTuneParameters()
 
         // Get parameter references
         retuneSpeedParameter = parameterTree.parameter(withAddress: ParameterAddress.retuneSpeed.rawValue)!

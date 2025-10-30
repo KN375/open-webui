@@ -3,10 +3,10 @@ import AudioToolbox
 import CoreAudioKit
 
 /// SwiftUI-based Audio Unit View Controller
-/// Provides modern, intuitive interface for FreeAutotune
+/// Provides modern, intuitive interface for RealTune
 public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
 
-    private var audioUnit: FreeAutotuneAU?
+    private var audioUnit: RealTuneAU?
     private var observation: NSKeyValueObservation?
 
     public override func viewDidLoad() {
@@ -19,11 +19,11 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
     // MARK: - AUAudioUnitFactory
 
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        let audioUnit = try FreeAutotuneAU(componentDescription: componentDescription)
+        let audioUnit = try RealTuneAU(componentDescription: componentDescription)
         self.audioUnit = audioUnit
 
         // Create SwiftUI view and embed it
-        let contentView = FreeAutotuneView(audioUnit: audioUnit)
+        let contentView = RealTuneView(audioUnit: audioUnit)
         let hostingController = NSHostingController(rootView: contentView)
 
         addChild(hostingController)
@@ -43,11 +43,11 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
 
 // MARK: - SwiftUI Views
 
-struct FreeAutotuneView: View {
-    @ObservedObject var viewModel: FreeAutotuneViewModel
+struct RealTuneView: View {
+    @ObservedObject var viewModel: RealTuneViewModel
 
-    init(audioUnit: FreeAutotuneAU) {
-        self.viewModel = FreeAutotuneViewModel(audioUnit: audioUnit)
+    init(audioUnit: RealTuneAU) {
+        self.viewModel = RealTuneViewModel(audioUnit: audioUnit)
     }
 
     var body: some View {
@@ -141,7 +141,7 @@ struct FreeAutotuneView: View {
 struct HeaderView: View {
     var body: some View {
         VStack(spacing: 4) {
-            Text("FreeAutotune")
+            Text("RealTune")
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(.white)
 
@@ -227,8 +227,8 @@ struct ParameterSliderView: View {
 
 // MARK: - View Model
 
-class FreeAutotuneViewModel: ObservableObject {
-    private let audioUnit: FreeAutotuneAU
+class RealTuneViewModel: ObservableObject {
+    private let audioUnit: RealTuneAU
 
     @Published var retuneSpeed: Double = 50.0 {
         didSet { updateParameter(.retuneSpeed, value: Float(retuneSpeed)) }
@@ -251,7 +251,7 @@ class FreeAutotuneViewModel: ObservableObject {
 
     private var updateTimer: Timer?
 
-    init(audioUnit: FreeAutotuneAU) {
+    init(audioUnit: RealTuneAU) {
         self.audioUnit = audioUnit
 
         // Start timer to update pitch display
